@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Swasthya Sathi | Step-by-Step Health Awareness</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#f5faf7;color:#17352a;line-height:1.55}
+header{background:#08633e;color:#fff;padding:15px 6%;position:sticky;top:0;z-index:10;box-shadow:0 2px 12px #0002}
+.nav{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center}
+.logo{font-size:21px;font-weight:800}.logo span{color:#ffd166}
+nav a{color:#fff;text-decoration:none;margin-left:18px}
+.hero{padding:55px 6%;background:linear-gradient(135deg,#e6f6ed,#fff)}
+.wrap{max-width:1100px;margin:auto}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.08;color:#12352a;margin:10px 0}
+h2{text-align:center;color:#12352a}
+.sub{text-align:center;color:#64756d}
+.badge{display:inline-block;background:#d7f0e1;color:#08633e;padding:7px 13px;border-radius:25px;font-weight:700}
+.steps{display:flex;justify-content:center;gap:8px;margin:30px auto;max-width:800px}
+.stepDot{padding:9px 16px;border-radius:20px;background:#dfe9e3;color:#587067;font-weight:700}
+.stepDot.active{background:#08633e;color:#fff}
+.panel{max-width:800px;margin:25px auto;background:#fff;border:1px solid #dce9e1;border-radius:18px;padding:28px;box-shadow:0 8px 25px #12352a10}
+.question{font-size:1.15rem;font-weight:700;margin-bottom:15px}
+.optionGrid{display:grid;grid-template-columns:1fr 1fr;gap:13px}
+.option{border:2px solid #d6e4dc;background:#fff;border-radius:12px;padding:15px;cursor:pointer;text-align:left}
+.option:hover{border-color:#08633e;background:#f2faf5}
+.option.selected{border-color:#08633e;background:#e9f7ef}
+.btn{background:#08633e;color:#fff;border:0;border-radius:9px;padding:12px 20px;font-weight:700;cursor:pointer;margin-top:18px}
+.btn.secondary{background:#fff;color:#08633e;border:2px solid #08633e;margin-left:8px}
+.note{background:#fff7df;border:1px solid #e5cb70;border-radius:10px;padding:14px;margin-top:18px;font-size:.92rem}
+label{display:block;font-weight:700;margin:14px 0 6px}
+select{width:100%;padding:12px;border:1px solid #cbd9d1;border-radius:8px;font-size:1rem}
+.result{display:none}
+.resultGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-top:20px}
+.resultCard{background:#f4fbf6;border:1px solid #cfe5d7;border-radius:14px;padding:20px}
+.resultCard h3{color:#08633e;margin-top:0}
+.number{font-size:1.6rem;font-weight:800;color:#08633e}
+.warning{background:#fff1f0;border:1px solid #edc4c0;padding:14px;border-radius:10px;margin-top:18px}
+footer{background:#103a2c;color:#fff;padding:30px 6%;margin-top:50px}
+.small{font-size:.9rem;color:#c8ddd4}
+@media(max-width:700px){nav{display:none}.optionGrid,.resultGrid{grid-template-columns:1fr}.steps{flex-wrap:wrap}}
+ 
+.welcome{padding:55px 6%;background:linear-gradient(135deg,#dff5e8,#fff)}
+.welcomeCard{max-width:900px;text-align:center;background:white;border-radius:24px;padding:40px 28px;box-shadow:0 12px 35px #12352a14;border:1px solid #dbe9e1}
+.welcomeIcon{font-size:3.5rem;margin-bottom:8px}.welcomeCard h2{font-size:2.3rem;margin:12px 0}.welcomeCard p{max-width:720px;margin:12px auto 22px}
+.welcomeFeatures{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:25px 0}
+.welcomeFeatures div{background:#f2faf5;padding:15px;border-radius:13px;display:flex;flex-direction:column;gap:4px}
+.welcomeFeatures span{font-size:.85rem;color:#64756d}
+.checkOption{border:2px solid #d6e4dc;background:#fff;border-radius:12px;padding:15px;cursor:pointer;font-weight:600}
+.checkOption:has(input:checked){border-color:#08633e;background:#e9f7ef}
+.checkOption input{margin-right:8px;accent-color:#08633e}
+
+.poster{background:linear-gradient(135deg,#f0fbf4,#ffffff);border:1px solid #cfe5d7;border-radius:24px;padding:30px;box-shadow:0 12px 35px #12352a14;overflow:hidden}
+.posterTop{display:flex;justify-content:space-between;align-items:center;background:#08633e;color:#fff;border-radius:18px;padding:25px 28px}
+.posterTop h2{color:#fff;text-align:left;margin:10px 0 5px;font-size:2rem}.posterTop p{margin:0;color:#e1f2e9}
+.posterFigure{font-size:5rem;filter:drop-shadow(0 4px 3px #0002)}
+.activityChart{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:22px 0}
+.activityItem{background:#fff;border:1px solid #dce9e1;border-radius:16px;padding:20px;text-align:center;display:flex;flex-direction:column;gap:5px;transition:transform .2s}
+.activityItem:hover{transform:translateY(-4px)}
+.activityIcon{font-size:2.5rem}.activityItem b{font-size:1.1rem;color:#08633e}.activityItem small{color:#64756d}
+.moveSteps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:20px 0}
+.moveSteps div{background:#e9f7ef;border-radius:14px;padding:15px;text-align:center}
+.moveSteps strong{display:block;font-size:1.6rem;color:#08633e}.moveSteps span{font-weight:800;color:#17352a;display:block}.moveSteps small{color:#64756d}
+.posterTip{background:#fff7df;border:1px solid #e5cb70;border-radius:12px;padding:16px;font-size:1.05rem}
+.posterSafety{font-size:.82rem;color:#64756d;margin:16px 4px 0}
+@media(max-width:700px){.posterTop{padding:20px}.posterFigure{font-size:3rem}.activityChart{grid-template-columns:1fr 1fr}.moveSteps{grid-template-columns:1fr 1fr}}
+ 
+.activityItem{cursor:pointer}.activityItem:active{transform:scale(.98)}
+.topicPage{display:none;position:fixed;inset:0;z-index:50;background:rgba(16,58,44,.25);overflow:auto;padding:35px 6%}
+.topicCard{max-width:850px;margin:30px auto;background:white;border-radius:24px;padding:32px;box-shadow:0 15px 50px #0003;border:1px solid #dce9e1}
+.backBtn{border:0;background:#e9f7ef;color:#08633e;padding:10px 15px;border-radius:9px;font-weight:700;cursor:pointer}
+.topicIcon{font-size:4rem;text-align:center;margin-top:15px}.topicCard h2{text-align:center;font-size:2.2rem;margin:5px}
+.topicIntro{text-align:center;color:#64756d;font-size:1.05rem}.topicAdvice{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:22px 0}
+.adviceBox{background:#f4fbf6;border:1px solid #cfe5d7;border-radius:14px;padding:18px}.adviceBox h3{margin-top:0;color:#08633e}
+.topicChecklist{background:#fff8e6;border:1px solid #e5cb70;border-radius:14px;padding:18px}.topicChecklist li{margin:9px 0}
+@media(max-width:700px){.topicAdvice{grid-template-columns:1fr}.topicPage{padding:15px}.topicCard{padding:22px}}
+
+.concernPosterSection{padding:35px 6% 20px}
+.concernGrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:25px}
+.concernCard{background:#fff;border:2px solid #dce9e1;border-radius:16px;padding:20px 12px;text-align:center;cursor:pointer;font-size:2rem;display:flex;flex-direction:column;gap:6px;transition:.2s}
+.concernCard:hover{transform:translateY(-4px);border-color:#08633e;box-shadow:0 8px 20px #12352a12}
+.concernCard b{font-size:1rem;color:#08633e}.concernCard small{font-size:.75rem;color:#64756d}
+@media(max-width:800px){.concernGrid{grid-template-columns:1fr 1fr}}
+
+.activeHero{padding:0;background:linear-gradient(135deg,#e8f8ef,#fff7df)}
+.activePoster{min-height:520px;display:grid;grid-template-columns:1.2fr .8fr;align-items:center;gap:20px;overflow:hidden}
+.activeText{padding:45px 0}.activeText h1{font-size:clamp(2.4rem,6vw,4.4rem);max-width:700px;margin:14px 0}.heroLead{font-size:1.15rem;max-width:650px;color:#52665d}
+.heroPills{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.heroPills span{background:#fff;border:1px solid #d4e6db;padding:10px 14px;border-radius:25px;font-weight:700}
+.heroBtn{font-size:1.05rem;padding:14px 24px}.heroHint{font-size:.9rem;color:#64756d;margin-top:13px}
+.heroArt{height:420px;background:#dff3e7;border-radius:50% 50% 0 0;position:relative;display:flex;align-items:center;justify-content:center}
+.sun{position:absolute;top:45px;right:65px;font-size:3rem}.runner{font-size:9rem;transform:scaleX(-1);filter:drop-shadow(0 7px 5px #12352a22)}.ground{position:absolute;bottom:50px;font-size:2rem;letter-spacing:5px}
+.surveyHint{background:#eef9f2;padding:11px 14px;border-radius:10px;color:#08633e;font-weight:600}
+.resultHero{text-align:center;background:linear-gradient(135deg,#e9f7ef,#fff);border-radius:18px;padding:18px;margin-bottom:20px}.resultHero h2{margin:4px}.resultEmoji{font-size:2rem}.resultHero p{margin:5px;color:#64756d}
+.cardLabel{font-size:.85rem;color:#64756d;margin-top:-8px;margin-bottom:10px}.doLabel{font-weight:800;color:#08633e;margin-bottom:3px}
+.resultCard{transition:.2s}.resultCard:hover{transform:translateY(-3px)}
+.waterCard{border-top:5px solid #5ca9d6}.sleepCard{border-top:5px solid #8c78c8}.foodCard{border-top:5px solid #66a66f}.exerciseCard{border-top:5px solid #e7a94b}
+@media(max-width:700px){.activePoster{grid-template-columns:1fr;min-height:auto}.activeText{padding:40px 0 15px}.heroArt{height:270px}.runner{font-size:6rem}.sun{right:30px}.activeText h1{font-size:2.7rem}}
+
+
+.finalPoster{background:linear-gradient(145deg,#effaf3,#fff);border:2px solid #cfe5d7;border-radius:24px;padding:25px;box-shadow:0 12px 35px #12352a18}
+.posterHeading{text-align:center;background:#08633e;color:#fff;border-radius:18px;padding:22px}.posterHeading h2{color:#fff;margin:8px}.posterHeading p{margin:5px;color:#e4f2eb}
+.posterSparkle{font-size:2rem}.posterGrid{display:grid;grid-template-columns:1fr 1fr;gap:15px;margin:20px 0}
+.posterTile{background:#fff;border-radius:18px;padding:20px;min-height:190px;border:1px solid #d9e8df}.posterTile h3{margin:4px 0;color:#08633e}.tileIcon{font-size:2.4rem}.posterNumber{font-size:1.2rem;font-weight:800;color:#17352a;margin:7px 0}.posterTile p{margin:5px 0;color:#52665d}
+.waterTile{border-top:6px solid #63a8d3}.sleepTile{border-top:6px solid #8b79c6}.foodTile{border-top:6px solid #68a86f}.exerciseTile{border-top:6px solid #e4aa4f}
+.posterSteps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:15px 0}.posterSteps div{background:#e9f7ef;border-radius:12px;padding:12px;text-align:center}.posterSteps b{display:block;font-size:1.4rem;color:#08633e}.posterSteps span{font-size:.85rem;font-weight:700}
+.posterTip{background:#fff7df;border:1px solid #e5cb70;border-radius:12px;padding:14px}.posterSafety{font-size:.75rem;color:#718079;text-align:center}
+.miniFooterInfo{background:#103a2c;color:#fff;text-align:center;padding:18px}.miniFooterInfo p{margin:0}
+@media(max-width:700px){.moveBanner{grid-template-columns:1fr}.moveMiniGrid{grid-template-columns:1fr 1fr}.posterGrid{grid-template-columns:1fr}.posterSteps{grid-template-columns:1fr 1fr}}
+
+.posterSub{font-size:.88rem;color:#dceee5;margin:4px 0 0}
+.posterTile{display:none}
+</style>
+</head>
+<body>
+
+<header>
+<div class="nav">
+<div class="logo">🇮🇳 Swasthya <span>Sathi</span></div>
+<nav><a href="#survey">Start Survey</a><a href="#moveSuggestions"></a></nav>
+</div>
+</header>
+
+<section class="hero activeHero">
+<div class="wrap">
+<div class="activePoster">
+<div class="activeText">
+<span class="badge">MOVE • PLAY • STAY ACTIVE</span>
+<h1>Move More. Feel Better. Have Fun! 🏃</h1>
+<p class="heroLead">Welcome to <b>Swasthya Sathi</b> — a simple health-awareness journey made to help you understand your daily habits.</p>
+<div class="heroPills">
+<span>🚶 Walk</span><span>⚽ Play</span><span>💃 Dance</span><span>🚴 Cycle</span><span>🧘 Stretch</span>
+</div>
+<button class="btn heroBtn" onclick="document.getElementById('survey').scrollIntoView({behavior:'smooth'})">Start Health Survey →</button>
+<p class="heroHint">1️⃣ Survey → 2️⃣ Get suggestions → 3️⃣ Learn healthy habits</p>
+</div>
+<div class="heroArt">
+<div class="sun">☀️</div>
+<div class="runner">🏃‍♀️</div>
+<div class="ground">🌱 🌿 🌱 🌿 🌱</div>
+</div>
+</div>
+</div>
+</section>
+<section id="survey">
+<div class="wrap">
+<div class="steps">
+<div class="stepDot active" id="dot1">1. Survey</div>
+<div class="stepDot" id="dot2">2. Profile</div>
+<div class="stepDot" id="dot3">3. Final Poster</div>
+</div>
+
+<div class="panel" id="step1">
+<div class="question">Step 1 — Health Survey 🩺</div><p class="sub">Tap one or more concerns that match you.</p>
+<p class="surveyHint">💡 There is no right or wrong answer. Choose what feels closest to you.</p>
+<div class="optionGrid">
+<label class="checkOption"><input type="checkbox" name="concern" value="constipation" onchange="toggleConcern(this)"> 🫃 Digestive discomfort / constipation</label>
+<label class="checkOption"><input type="checkbox" name="concern" value="iron" onchange="toggleConcern(this)"> 🩸 Low-iron concern / tiredness</label>
+<label class="checkOption"><input type="checkbox" name="concern" value="bp" onchange="toggleConcern(this)"> ❤️ High blood-pressure concern</label>
+<label class="checkOption"><input type="checkbox" name="concern" value="diabetes" onchange="toggleConcern(this)"> 🩺 Diabetes / blood-sugar concern</label>
+<label class="checkOption"><input type="checkbox" name="concern" value="general" onchange="toggleConcern(this)"> 🥗 Low fruit & vegetable intake</label>
+<label class="checkOption"><input type="checkbox" name="concern" value="sleep" onchange="toggleConcern(this)"> 😴 Sleep concern</label>
+<label class="checkOption"><input type="checkbox" name="concern" value="activity" onchange="toggleConcern(this)"> 🏃 Low physical activity</label>
+<label class="checkOption"><input type="checkbox" name="concern" value="none" onchange="toggleNone(this)"> 🌱 No specific concern</label>
+</div>
+<button class="btn" onclick="nextStep(2)">Next →</button>
+</div>
+
+<div class="panel" id="step2" style="display:none">
+<div class="question">Step 2 — Your Age & Lifestyle 👤</div>
+<label for="age">Age group</label>
+<select id="age">
+<option value="6-8">6–8 years</option>
+<option value="9-12">9–12 years</option>
+<option value="13-14">13–14 years</option>
+<option value="15-17">15–17 years</option>
+<option value="18-25">18–25 years</option>
+<option value="26-39">26–39 years</option>
+<option value="40-59">40–59 years</option>
+<option value="60+">60+ years</option>
+</select>
+
+<label for="sex">Reference group for water guide</label>
+<select id="sex">
+<option value="female">Female</option>
+<option value="male">Male</option>
+</select>
+
+<label for="activity">Current activity level</label>
+<select id="activity">
+<option value="low">Mostly sitting / little activity</option>
+<option value="some">Some activity</option>
+<option value="active">Regularly active</option>
+</select>
+
+<div class="note"><b>Why we ask:</b> Water needs vary with age, activity and environment. The website uses a general reference guide rather than claiming that one exact amount is right for every person.</div>
+<button class="btn secondary" onclick="nextStep(1)">← Back</button>
+<button class="btn" onclick="showResult()">See My Suggestions →</button>
+</div>
+
+<div class="panel result" id="step3">
+<div class="finalPoster">
+<div class="posterHeading">
+<div class="posterSparkle">✨</div>
+<span class="badge">YOUR SURVEY RESULT</span>
+<h2>🌿 My Healthy Lifestyle Plan</h2>
+<p id="summary"></p><p class="posterSub">Only the suggestions needed for your selected concern are shown.</p>
+</div>
+
+<div class="posterGrid">
+<div class="posterTile waterTile">
+<div class="tileIcon">💧</div><h3>WATER</h3><div class="posterNumber" id="waterAmount"></div>
+<p id="waterText"></p>
+</div>
+<div class="posterTile sleepTile">
+<div class="tileIcon">😴</div><h3>SLEEP</h3><div class="posterNumber" id="sleepAmount">8–10 hours</div>
+<p id="sleepText"></p>
+</div>
+<div class="posterTile foodTile">
+<div class="tileIcon">🥗</div><h3>FOOD</h3><p class="posterNumber">ADD COLOUR</p>
+<p id="foodText"></p>
+</div>
+<div class="posterTile exerciseTile">
+<div class="tileIcon">🏃</div><h3>MOVE</h3><p class="posterNumber">KEEP MOVING</p>
+<p id="exerciseText"></p>
+</div>
+</div>
+
+<div class="posterSteps">
+<div><b>1</b><span>Eat well</span></div>
+<div><b>2</b><span>Drink regularly</span></div>
+<div><b>3</b><span>Sleep well</span></div>
+<div><b>4</b><span>Move daily</span></div>
+</div>
+
+<div class="posterTip">🌟 <b>My easy goal:</b> Choose one small healthy habit and repeat it every day.</div>
+<p class="posterSafety">Educational awareness only — not a diagnosis or treatment plan.</p>
+</div>
+<button class="btn" onclick="restart()">↻ Take Survey Again</button>
+</div>
+</div>
+</section>
+
+<section class="miniFooterInfo"><div class="wrap"><p>🌿 <b>Swasthya Sathi</b> — Healthy Diet & Lifestyle Awareness College Project</p></div></section>
+
+
+<div id="topicPage" class="topicPage">
+<div class="topicCard">
+<button class="backBtn" onclick="closeTopic()">← Back to Poster</button>
+<div id="topicIcon" class="topicIcon">😴</div>
+<h2 id="topicTitle">Sleep</h2>
+<p id="topicIntro"></p>
+<div id="topicAdvice" class="topicAdvice"></div>
+<div class="topicChecklist">
+<h3>✅ Simple daily checklist</h3>
+<ul id="topicList"></ul>
+</div>
+<div class="posterTip" id="topicTip"></div>
+</div>
+</div>
+
+
+<footer>
+<div class="wrap">
+<b>Swasthya Sathi</b>
+<p class="small">Healthy Diet & Lifestyle Awareness — student project website.</p>
+</div>
+</footer>
+
+<script>
+function scrollToSurvey(){document.getElementById('survey').scrollIntoView({behavior:'smooth'});}
+ 
+const topicData={
+sleep:{
+icon:'😴',title:'Sleep',intro:'Good sleep supports learning, mood, energy and everyday health.',
+boxes:[['🕐 Sleep target','Children 6–12 years generally need 9–12 hours. Teenagers 13–18 generally need 8–10 hours. Adults generally need 7–9 hours.'],['🌙 Better routine','Keep a consistent bedtime and wake time. Make the bedroom quiet, comfortable and suitable for sleep.']],
+list:['Keep a regular sleep and wake time.','Reduce unnecessary screen use close to bedtime.','Use a calming bedtime routine.','If sleep problems persist or seriously affect daily life, talk to a healthcare professional.'],
+tip:'Small, consistent changes to your sleep routine can be easier to maintain than trying to change everything at once.'
+},
+water:{
+icon:'💧',title:'Water / Hydration',intro:'Hydration needs vary with age, activity, food, climate and health.',
+boxes:[['🚰 Daily habit','Drink water regularly through the day and pay extra attention during heat or physical activity.'],['⚠️ Important','There is no single amount that is correct for every person. If a healthcare professional has given you a fluid restriction, follow it.']],
+list:['Keep a water bottle available when practical.','Choose water regularly instead of making sugary drinks your main beverage.','Drink more during prolonged activity or hot weather as appropriate.','Do not force excessive amounts of water.'],
+tip:'Use thirst, routine and your environment as practical guides rather than chasing one exact number.'
+},
+food:{
+icon:'🥗',title:'Fruits & Vegetables',intro:'A varied diet can include different fruits and vegetables across meals and snacks.',
+boxes:[['🍎 Fruit','Choose whole fruits regularly and try different seasonal varieties.'],['🥦 Vegetables','Include vegetables in regular meals and vary colours and types.']],
+list:['Add one fruit to a regular snack or meal.','Add vegetables to familiar dishes such as dal, rice, roti or sandwiches.','Try several colours across the week.','Increase fibre gradually if your current intake is low.'],
+tip:'Start with one small food change that you can repeat consistently.'
+},
+exercise:{
+icon:'🏃',title:'Physical Exercise',intro:'Choose enjoyable movement and build your activity gradually.',
+boxes:[['🎯 Goal','For ages 5–17, WHO recommends an average of at least 60 minutes per day of moderate-to-vigorous physical activity.'],['🏅 Options','Walking, cycling, sports, dancing, swimming and active play can all be ways to move.']],
+list:['Pick an activity you enjoy.','Break up long periods of sitting with movement.','Increase activity gradually.','If you have pain, an injury or a medical condition, follow professional advice.'],
+tip:'The best activity is one you can enjoy and do regularly.'
+},
+walk:{
+icon:'🚶',title:'Walking',intro:'Walking is a simple way to add movement to everyday life.',
+boxes:[['👟 Start','Begin with a comfortable duration and pace.'],['📈 Build','Gradually increase time or frequency as it becomes comfortable.']],
+list:['Take short walking breaks during long sitting periods.','Walk with a friend or family member if you enjoy company.','Choose safe, suitable places to walk.','Increase gradually rather than suddenly.'],
+tip:'Even small active breaks can make a sedentary day more active.'
+},
+stretch:{
+icon:'🧘',title:'Stretching',intro:'Gentle stretching can be included as part of a movement routine.',
+boxes:[['🤸 Gentle','Move slowly and comfortably without forcing a stretch.'],['⏱️ Routine','Use stretching as a short break after periods of sitting or as part of your activity routine.']],
+list:['Warm up with gentle movement first when appropriate.','Avoid bouncing or forcing a painful range.','Breathe normally.','Stop if you feel pain, dizziness or unusual symptoms.'],
+tip:'Stretching should feel comfortable—not painful.'
+}
+};
+
+function openTopic(key){
+const d=topicData[key]; if(!d)return;
+document.getElementById('topicIcon').textContent=d.icon;
+document.getElementById('topicTitle').textContent=d.title;
+document.getElementById('topicIntro').textContent=d.intro;
+document.getElementById('topicAdvice').innerHTML=d.boxes.map(b=>'<div class="adviceBox"><h3>'+b[0]+'</h3><p>'+b[1]+'</p></div>').join('');
+document.getElementById('topicList').innerHTML=d.list.map(x=>'<li>'+x+'</li>').join('');
+document.getElementById('topicTip').innerHTML='💡 <b>Quick suggestion:</b> '+d.tip;
+document.getElementById('topicPage').style.display='block';
+document.body.style.overflow='hidden';
+}
+function closeTopic(){document.getElementById('topicPage').style.display='none';document.body.style.overflow='auto';}
+
+let concerns=['none'];
+
+const data={
+constipation:{
+name:'Digestive discomfort / constipation',
+water:'Keep fluids regular; adequate hydration supports normal bowel function. Do not force a fixed extra amount.',
+sleep:'Aim for 8–10 hours. Keep a regular bedtime and wake time to support a consistent daily routine.',
+food:'Gradually add fibre-rich foods such as vegetables, beans and suitable whole fruits. Increase fibre gradually.',
+exercise:'Regular comfortable movement, such as walking, can support bowel regularity. Start gradually.'
+},
+iron:{
+name:'Low-iron concern / tiredness',
+water:'Use your normal hydration guide; there is no general evidence-based illness-specific extra water target for low iron.',
+sleep:'Aim for 8–10 hours. Persistent tiredness should not automatically be blamed on poor sleep.',
+food:'Include iron-containing foods such as beans, lentils and leafy vegetables. Vitamin-C-rich fruits/vegetables can be included with plant sources of iron.',
+exercise:'Choose comfortable activity. If you have significant fatigue, dizziness or diagnosed anemia, ask a health professional before increasing activity.'
+},
+bp:{
+name:'High blood-pressure concern',
+water:'Use your normal hydration guide. Do not deliberately increase water to treat blood pressure unless a clinician advises it.',
+sleep:'Aim for 8–10 hours and keep a consistent sleep schedule.',
+food:'Choose a variety of fruits and vegetables and limit high-salt packaged foods as part of a balanced eating pattern.',
+exercise:'Regular moderate activity can support cardiovascular health. If you have a diagnosed condition, follow your clinician’s activity advice.'
+},
+diabetes:{
+name:'Diabetes / blood-sugar concern',
+water:'Choose water as the main everyday drink. There is no single extra-water prescription for diabetes; needs vary.',
+sleep:'Aim for 8–10 hours and keep sleep and wake times consistent.',
+food:'Prefer whole fruits in suitable portions and include non-starchy vegetables regularly. Avoid relying on fruit juice as a substitute for whole fruit.',
+exercise:'Regular activity is generally beneficial, but if you use diabetes medicines/insulin, follow your clinician’s advice about activity and glucose management.'
+},
+sleep:{
+name:'Sleep concern',
+water:'Keep water regular during the day and avoid drinking large amounts immediately before bedtime if it disrupts sleep.',
+sleep:'Aim for the age-appropriate sleep range and keep bedtime and wake time consistent.',
+food:'Choose balanced meals and avoid relying heavily on caffeinated or highly sugary drinks close to bedtime.',
+exercise:'Regular daytime activity can support sleep; avoid intense exercise immediately before bed if it makes it harder to sleep.'
+},
+activity:{
+name:'Low physical activity',
+water:'Drink regularly and pay attention to hydration during activity, heat and outdoor time.',
+sleep:'Aim for the age-appropriate sleep range and keep a consistent routine.',
+food:'Include a variety of fruits and vegetables to support an overall balanced eating pattern.',
+exercise:'Start with short, manageable activity sessions and gradually build toward the age-appropriate activity target.'
+},
+general:{
+name:'Low fruit & vegetable intake',
+water:'Use your normal hydration guide and drink water regularly. More is not always better.',
+sleep:'Aim for 8–10 hours and keep a regular sleep routine.',
+food:'Start with one small change: add a fruit or an extra serving of vegetables to a regular meal and increase variety over time.',
+exercise:'Choose enjoyable movement and build gradually toward the age-appropriate activity target.'
+},
+none:{
+name:'No specific concern',
+water:'Use your age-based reference as a guide and adjust for activity and hot environments. Drink according to thirst.',
+sleep:'Aim for 8–10 hours and keep a consistent sleep and wake schedule.',
+food:'Include a variety of fruits and vegetables across the week and choose mostly whole foods.',
+exercise:'Build toward the age-appropriate activity target with enjoyable walking, cycling, sports, play or other movement.'
+}
+};
+
+function toggleConcern(box){
+const none=document.querySelector('input[value="none"]');
+if(box.checked){none.checked=false;}
+concerns=[...document.querySelectorAll('input[name="concern"]:checked')].map(x=>x.value);
+if(!concerns.length) concerns=['none'];
+}
+function toggleNone(box){
+if(box.checked){
+document.querySelectorAll('input[name="concern"]').forEach(x=>{if(x!==box)x.checked=false;});
+concerns=['none'];
+}else{concerns=[];}
+}
+function nextStep(n){
+if(n===2 && (!concerns || concerns.length===0)){
+  concerns=['none'];
+  const none=document.querySelector('input[value="none"]');
+  if(none) none.checked=true;
+}
+document.getElementById('step1').style.display=n===1?'block':'none';
+document.getElementById('step2').style.display=n===2?'block':'none';
+document.getElementById('step3').style.display='none';
+document.getElementById('dot1').classList.toggle('active',n===1);
+document.getElementById('dot2').classList.toggle('active',n===2);
+document.getElementById('dot3').classList.remove('active');
+window.scrollTo({top:document.getElementById('survey').offsetTop-60,behavior:'smooth'});
+}
+function showResult(){
+const age=document.getElementById('age').value;
+const activity=document.getElementById('activity').value;
+const selected=concerns.length?concerns.filter(x=>x!=='none'):['none'];
+
+/* Only show recommendations that are specifically relevant
+   to the selected concern(s), instead of showing all four areas. */
+const concernAdvice={
+  constipation:{
+    title:'Digestive / Constipation',
+    items:[
+      ['🥗 FOOD','Add fibre-rich vegetables, beans and suitable whole fruits gradually.'],
+      ['💧 WATER','Drink fluids regularly; adequate hydration supports normal bowel function.'],
+      ['🚶 MOVEMENT','Regular comfortable walking or movement can support bowel regularity.']
+    ]
+  },
+  iron:{
+    title:'Low-Iron / Tiredness',
+    items:[
+      ['🥗 FOOD','Include iron-containing foods such as lentils, beans and leafy vegetables. Add vitamin-C-rich foods with plant iron sources.'],
+      ['😴 SLEEP','Keep a regular sleep routine, but persistent tiredness should not automatically be assumed to be from lack of sleep.']
+    ]
+  },
+  bp:{
+    title:'Blood-Pressure Concern',
+    items:[
+      ['🥗 FOOD','Choose plenty of vegetables and fruits and reduce high-salt packaged foods.'],
+      ['🏃 MOVEMENT','Regular moderate activity can support cardiovascular health.']
+    ]
+  },
+  diabetes:{
+    title:'Diabetes / Blood-Sugar Concern',
+    items:[
+      ['🥗 FOOD','Prefer whole fruits in suitable portions and include non-starchy vegetables regularly.'],
+      ['💧 WATER','Choose water instead of sugary drinks for routine hydration.'],
+      ['🏃 MOVEMENT','Regular physical activity can be helpful; follow professional advice if using diabetes medicines or insulin.']
+    ]
+  },
+  general:{
+    title:'Low Fruit & Vegetable Intake',
+    items:[
+      ['🥗 FOOD','Start by adding one fruit or an extra serving of vegetables to a regular meal.'],
+      ['💧 WATER','Drink water regularly and avoid relying mainly on sweetened drinks.']
+    ]
+  },
+  sleep:{
+    title:'Sleep Concern',
+    items:[
+      ['😴 SLEEP','Keep a consistent bedtime and wake time and aim for the age-appropriate sleep range.'],
+      ['🏃 MOVEMENT','Regular daytime activity may support sleep; avoid intense exercise immediately before bed if it disturbs sleep.']
+    ]
+  },
+  activity:{
+    title:'Low Physical Activity',
+    items:[
+      ['🏃 MOVEMENT','Start with short, enjoyable activity sessions and increase gradually.'],
+      ['💧 WATER','Drink regularly and pay attention to hydration during activity and hot weather.']
+    ]
+  },
+  none:{
+    title:'General Healthy Lifestyle',
+    items:[
+      ['🥗 FOOD','Include a variety of fruits and vegetables.'],
+      ['💧 WATER','Drink regularly according to thirst, activity and environment.'],
+      ['😴 SLEEP','Keep a regular sleep and wake routine.'],
+      ['🏃 MOVEMENT','Move regularly and break up long periods of sitting.']
+    ]
+  }
+};
+
+let combined=[];
+selected.forEach(key=>{
+  if(concernAdvice[key]) combined=combined.concat(concernAdvice[key].items);
+});
+
+/* Remove duplicate categories when multiple concerns are selected,
+   keeping only the most relevant first recommendation for each category. */
+const unique=[];
+const seen=new Set();
+combined.forEach(item=>{
+  const category=item[0].split(' ')[1] || item[0];
+  if(!seen.has(category)){
+    seen.add(category);
+    unique.push(item);
+  }
+});
+
+document.getElementById('summary').innerHTML=
+  '<b>Suggestions for:</b> '+selected.map(x=>concernAdvice[x].title).join(', ');
+
+document.getElementById('waterAmount').textContent='Relevant only';
+document.getElementById('sleepAmount').textContent='Relevant only';
+document.getElementById('waterText').textContent='';
+document.getElementById('sleepText').textContent='';
+document.getElementById('foodText').textContent='';
+document.getElementById('exerciseText').textContent='';
+
+/* Hide all poster tiles first. */
+document.querySelectorAll('.posterTile').forEach(tile=>tile.style.display='none');
+
+/* Create only the tiles needed for this concern. */
+const tileMap={
+  '🥗':['.foodTile','foodText'],
+  '💧':['.waterTile','waterText'],
+  '😴':['.sleepTile','sleepText'],
+  '🏃':['.exerciseTile','exerciseText'],
+  '🚶':['.exerciseTile','exerciseText']
+};
+
+unique.forEach(item=>{
+  const icon=item[0].split(' ')[0];
+  const map=tileMap[icon];
+  if(map){
+    const tile=document.querySelector(map[0]);
+    tile.style.display='block';
+    const text=document.getElementById(map[1]);
+    text.textContent=item[1];
+    if(map[1]==='waterText') document.getElementById('waterAmount').textContent='For this concern';
+    if(map[1]==='sleepText'){
+      let hrs='7–9 hours/night';
+      if(age==='6-8'||age==='9-12') hrs='9–12 hours/night';
+      else if(age==='13-14'||age==='15-17') hrs='8–10 hours/night';
+      document.getElementById('sleepAmount').textContent=hrs;
+    }
+  }
+});
+
+/* If a concern has no mapped card, show its text in the first available card. */
+if(unique.length===0){
+  document.querySelector('.foodTile').style.display='block';
+  document.getElementById('foodText').textContent='No specific concern selected. Follow general healthy-lifestyle habits.';
+}
+
+document.getElementById('step1').style.display='none';
+document.getElementById('step2').style.display='none';
+document.getElementById('step3').style.display='block';
+document.getElementById('dot1').classList.remove('active');
+document.getElementById('dot2').classList.remove('active');
+document.getElementById('dot3').classList.add('active');
+window.scrollTo({top:document.getElementById('survey').offsetTop-60,behavior:'smooth'});
+}
+function restart(){
+concerns=['none'];
+document.querySelectorAll('input[name="concern"]').forEach(x=>x.checked=false);
+document.querySelector('input[value="none"]').checked=true;
+nextStep(1);
+}
+</script>
+</body>
+</html>
